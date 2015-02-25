@@ -1,0 +1,82 @@
+<html lang="ja" ng-app="ligApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>LINE画像ジェネレータ</title>
+
+    <link rel="stylesheet" href="assets/style/master.css">
+</head>
+
+<body>
+
+<section ng-controller="mainCtrl">
+
+<div class="app">
+    <div class="app-header">
+        <div class="header-status">
+            <div class="status-signal">
+                <ul>
+                    <li ng-repeat="signal in signals" class="signal-pin {{ signal }}"></li>
+                </ul>
+            </div>
+            <p class="status-carrier">{{ status.carrier }}</p>
+            <p class="status-network {{ status.network }}"></p>
+            <p class="status-time">{{ status.time | date: 'HH:mm' }}</p>
+            <div class="status-battery">
+                <p class="battery-number">{{ status.battery }}%</p>
+                <div class="battery-icon">
+                    <p style="width: {{ status.battery }}%;"></p>
+                </div>
+            </div>
+        </div>
+        <div class="header-nav">
+            <p class="nav-back"></p>
+            <p class="nav-title">{{ title }}</p>
+            <div class="nav-icon">
+                <p class="icon-note"></p>
+                <p class="icon-menu"></p>
+            </div>
+        </div>
+    </div>
+    <div class="app-timeline">
+        <ul class="timeline-list">
+            <li ng-repeat="log in logs track by $index" class="timeline-log {{ log.type }}"><p class="timeline-log-word">{{ log.text }}</p></li>
+        </ul>
+    </div>
+    <div class="app-footer">
+        <form ng-submit="messageSubmit(message)" class="footer-form">
+            <div class="footer-type">
+                <p ng-if="type === 'right'" ng-click="typeChange(type)" class="type-btn">自分</p>
+                <p ng-if="type === 'left'" ng-click="typeChange(type)" class="type-btn">相手</p>
+            </div>
+            <div class="footer-input">
+                <input type="text" class="input-message" ng-model="message">
+            </div>
+            <div class="footer-submit">
+                <button class="submit-btn">送信</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="option">
+    <form>
+        <input type="radio" ng-model="status.network" value="three">3G
+        <input type="radio" ng-model="status.network" value="four">4G
+        <input type="radio" ng-model="status.network" value="wifi">wifi
+    </form>
+    <input type="range" ng-model="status.signal" max="5" min="1">
+    <input type="text" ng-model="status.carrier">
+    <input type="range" ng-model="status.battery" max="100" min="1">
+    <input type="text" ng-model="title">
+</div>
+
+
+</section>
+
+<script src="assets/script/lib/angular.min.js"></script>
+<script src="assets/script/main.js"></script>
+</body>
+</html>
