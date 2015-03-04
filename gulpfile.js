@@ -44,6 +44,7 @@ gulp.task('jscopy', function() {
 gulp.task('init', function() {
     gulp.src([
         'node_modules/angular/angular.min.js',
+        'node_modules/html2canvas/dist/html2canvas.min.js'
     ])
         .pipe(gulp.dest('views/assets/script/lib'));
 });
