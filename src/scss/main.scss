@@ -247,6 +247,7 @@
 }
 .timeline-log-word {
     z-index: 100;
+    max-width: 80%;
     font-size: 14px;
     padding: 5px 10px;
     -webkit-border-radius: 15px;
@@ -254,6 +255,13 @@
     border-radius: 15px;
     display: inline-block;
     position: relative;
+}
+.timeline-log-time {
+    color: #fff;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
+    font-size: 10px;
 }
 
 

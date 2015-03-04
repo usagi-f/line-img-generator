@@ -41,7 +41,11 @@
     </div>
     <div class="app-timeline">
         <ul class="timeline-list">
-            <li ng-repeat="log in logs track by $index" class="timeline-log {{ log.type }}"><p class="timeline-log-word">{{ log.text }}</p></li>
+            <li ng-repeat="log in logs track by log.id" class="timeline-log {{ log.type }}">
+                <p ng-if="log.type === 'right'" class="timeline-log-time">既読<br>{{ log.time | date: 'HH:mm' }}</p>
+                <p class="timeline-log-word">{{ log.text }}</p>
+                <p ng-if="log.type === 'left'" class="timeline-log-time">{{ log.time | date: 'HH:mm' }}</p>
+            </li>
         </ul>
     </div>
     <div class="app-footer">

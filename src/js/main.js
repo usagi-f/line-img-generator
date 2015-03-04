@@ -5,32 +5,30 @@ var module = angular.module('ligApp', []);
 module.controller('mainCtrl', ['$scope', '$interval',
     function($scope, $interval) {
 
-    var time = new Date();
-    //status
+    //init
     $scope.title = 'お名前';
     $scope.type = 'right';
     $scope.status = {
-        signal: 1,
+        signal: 5,
         carrier: 'Softbank',
         network: 'wifi',
-        time: time,
+        time: new Date(),
         battery: 100
     };
 
+    //status
     $scope.$watch('status.signal', function() {
-        var array = {
+        var signalArray = {
             1: false,
             2: false,
             3: false,
             4: false,
             5: false
-        },
-            i = 1;
-        while (i <= $scope.status.signal) {
-            array[i] = true;
-            i++;
+        };
+        for (var i = 1; i <= $scope.status.signal; i++) {
+            signalArray[i] = true;
         }
-        $scope.signals = array;
+        $scope.signals = signalArray;
     });
     $interval(function() {
         $scope.status.time = new Date();
@@ -38,14 +36,16 @@ module.controller('mainCtrl', ['$scope', '$interval',
 
 
     //timeline
-    var logs = {},
+    var logs = [],
         item;
     $scope.count = 0;
     $scope.messageSubmit = function(str) {
         if (!str) { return false; }
         item = {
+            id: $scope.count,
             type: $scope.type,
-            text: str
+            text: str,
+            time: $scope.status.time
         };
         logs[$scope.count] = item;
         $scope.logs = logs;
