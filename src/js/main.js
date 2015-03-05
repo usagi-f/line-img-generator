@@ -61,4 +61,13 @@ module.controller('mainCtrl', ['$scope', '$interval',
             $scope.type = 'right';
         }
     };
+
+    //capture
+    $scope.capture = function() {
+        html2canvas(document.getElementById('app'), {
+            onrendered: function(canvas) {
+                document.getElementById('capture').href = canvas.toDataURL('image/png');
+            }
+        });
+    };
 }]);
