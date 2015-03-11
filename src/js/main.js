@@ -64,10 +64,13 @@ module.controller('mainCtrl', ['$scope', '$interval',
 
     //capture
     $scope.capture = function() {
+        var capture = document.getElementById('capture');
         html2canvas(document.getElementById('app'), {
             onrendered: function(canvas) {
-                document.getElementById('capture').href = canvas.toDataURL('image/png');
+                capture.href = canvas.toDataURL('image/png');
             }
         });
+        console.log(capture.href);
+        capture.click();
     };
 }]);
