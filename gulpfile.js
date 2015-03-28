@@ -17,7 +17,7 @@ gulp.task('sass', function() {
     return sass('src/scss/', {
         style : 'expanded'
     })
-        .on('error', function(err) { console.log('ERROR') })
+        .on('error', function(err) { console.log(err) })
         .pipe(gulp.dest('views/assets/style'));
 });
 
